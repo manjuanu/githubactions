@@ -7,27 +7,34 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+
     - name: Install MariaDB
       run: |
         sudo apt update
         sudo apt install -y mariadb-server
         sudo systemctl start mariadb
         sudo systemctl enable mariadb
+    - name: Additional Setup
+      run: |
+        sudo mkdir /mnt/ramdisk
+        sudo mount -t tmpfs -o size=1000m tmpfs /mnt/ramdisk
+        sudo df -h | grep mnt
+        sudo mkdir -p /mnt/ramdisk/mariadb
+        sudo chown -R mysql:mysql /mnt/ramdisk/mariadb
+        sudo /usr/bin/mysql_install_db --user=mysql --basedir="/usr/" --datadir=/mnt/ramdisk/mariadb
+        sudo sed -i 's/^#datadir\s*=.*/datadir = \/mnt\/ramdisk\/mariadb/' /etc/mysql/mariadb.conf.d/50-server.cnf
+        sudo sed -i 's/^socket\s*=.*/socket = \/tmp\/mysql.sock/' /etc/mysql/mariadb.conf.d/50-server.cnf
+        cat /etc/mysql/mariadb.conf.d/50-server.cnf
+        sudo systemctl restart mariadb
+        cat /etc/mysql/mariadb.conf.d/50-server.cnf
+        sudo mysql -S /tmp/mysql.sock --execute "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('');"
+        mysqladmin -u root --socket=/tmp/mysql.sock ping  
         ls -la /etc/mysql || true
         ls -la /etc/mysql/mariadb.conf.d ||true
         cat /etc/mysql/mariadb.conf.d/50-server.cnf ||true
         cat /etc/mysql/mysql.cnf  ||true
         cat /etc/mysql/mariadb.cnf ||true
-    - name: Install Redis
-      run: |
-        sudo apt update
-        sudo apt install -y redis-server
-        sudo systemctl stop redis-server
-        
-    - name: Run Redis Server in the Background
-      run: |
-        redis-server --notify-keyspace-events KEA --unixsocket /tmp/redis.sock --unixsocketperm 777 &
-        sleep 5  # Allow some time for Redis to start
+     
 
     - name: Check Redis Server Status
       run: |
