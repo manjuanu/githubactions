@@ -1,6 +1,6 @@
 name: MariaDB Server Setup
 
-on: push
+on: [push, pull_request]
 
 jobs:
   setup-mariadb:
@@ -10,13 +10,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up MariaDB
-      uses: ameyms/setup-mysql@v2
-      with:
-        mysql-version: '10.5'  # Specify the desired MariaDB version
-        server-id: 1
-        skip-root-user: true  # Skip creating a root user
-        databases: testdb
+    - name: Install MariaDB
+      run: |
+        sudo apt update
+        sudo apt install -y mariadb-server
+        sudo systemctl start mariadb
+        sudo systemctl enable mariadb
 
     - name: Additional Setup
       run: |
