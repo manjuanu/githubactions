@@ -13,12 +13,11 @@ jobs:
         sudo apt install -y mariadb-server
         sudo systemctl start mariadb
         sudo systemctl enable mariadb
-        mysql -v
         ls -la /etc/mysql || true
         ls -la /etc/mysql/mariadb.conf.d ||true
-        cat /etc/mysql/mariadb.conf.d/50-server.cnf
-        cat /etc/mysql/mysql.cnf
-        cat /etc/mysql/mariadb.cnf
+        cat /etc/mysql/mariadb.conf.d/50-server.cnf ||true
+        cat /etc/mysql/mysql.cnf  ||true
+        cat /etc/mysql/mariadb.cnf ||true
     - name: Install Redis
       run: |
         sudo apt update
