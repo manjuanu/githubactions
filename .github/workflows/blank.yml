@@ -1,10 +1,30 @@
-name: first workflow
-on: workflow_dispatch
+name: MariaDB Server Setup
+
+on: push
+
 jobs:
-  first-job:
-   runs-on: ubuntu-latest
-   steps:
-    - name: first step
-      run: echo "hello this is first workflow"
-    - name: secont step
-      run: echo "good bye to workflow"
+  setup-mariadb:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up MariaDB
+      uses: ameyms/setup-mysql@v2
+      with:
+        mysql-version: '10.5'  # Specify the desired MariaDB version
+        server-id: 1
+        skip-root-user: true  # Skip creating a root user
+        databases: testdb
+
+    - name: Additional Setup
+      run: |
+        sudo mkdir /mnt/ramdisk
+        sudo mount -t tmpfs -o size=1000m tmpfs /mnt/ramdisk
+        sudo df -h | grep mnt
+        sudo mkdir /mnt/ramdisk/mariadb
+        sudo chown -R mysql:mysql /mnt/ramdisk/mariadb
+        sudo /usr/bin/mysql_install_db --user=mysql --basedir="/usr/" --datadir=/mnt/ramdisk/mariadb
+        sudo systemctl restart mariadb
+        mysqladmin -u root ping
