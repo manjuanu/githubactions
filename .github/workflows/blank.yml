@@ -7,6 +7,15 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+    - name: Install MariaDB
+      run: |
+        sudo apt update
+        sudo apt install -y mariadb-server
+        sudo systemctl start mariadb
+        sudo systemctl enable mariadb
+        sudo mysql -v
+        ls -la /etc/mysql || true
+        ls -la /etc/mysql/mariadb.conf.d ||true
     - name: Install Redis
       run: |
         sudo apt update
