@@ -16,6 +16,7 @@ jobs:
         sudo mysql -v
         ls -la /etc/mysql || true
         ls -la /etc/mysql/mariadb.conf.d ||true
+        cat /etc/mysql/mariadb.conf.d/50-server.cnf
     - name: Install Redis
       run: |
         sudo apt update
