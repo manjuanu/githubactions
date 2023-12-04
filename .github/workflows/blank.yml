@@ -23,7 +23,7 @@ jobs:
         sudo chown -R mysql:mysql /mnt/ramdisk/mariadb
         sudo /usr/bin/mysql_install_db --user=mysql --basedir="/usr/" --datadir=/mnt/ramdisk/mariadb
         sudo sed -i 's/^#datadir\s*=.*/datadir = \/mnt\/ramdisk\/mariadb/' /etc/mysql/mariadb.conf.d/50-server.cnf
-        sudo sed -i 's/^socket\s*=.*/socket = \/tmp\/mysql.sock/' /etc/mysql/mariadb.conf.d/50-server.cnf
+        sudo sed -i '/\[mysqld\]/a socket = /tmp/mysql.sock' /etc/mysql/mariadb.conf.d/50-server.cnf
         cat /etc/mysql/mariadb.conf.d/50-server.cnf
         sudo systemctl restart mariadb
         cat /etc/mysql/mariadb.conf.d/50-server.cnf
