@@ -14,3 +14,5 @@ jobs:
         sudo cat /etc/group
         echo "$USER"
         groups "$USER"
+        sudo su
+        whoami
