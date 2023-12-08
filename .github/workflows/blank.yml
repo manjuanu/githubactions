@@ -11,6 +11,6 @@ jobs:
 
     - name: checking groups
       run: |
-       sudo mkdir -p /mnt/ramdisk/centrex
-       sudo chmod -R 777 /mnt/ramdisk
+       mkdir -p /mnt/ramdisk/centrex 
+       chmod -R 777 /mnt/ramdisk
        ls -la /mnt/ramdisk
