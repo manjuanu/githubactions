@@ -11,8 +11,6 @@ jobs:
 
     - name: checking groups
       run: |
-        sudo cat /etc/group
-        echo "$USER"
-        groups "$USER"
-        sudo su
-        whoami
+       sudo mkdir -p /mnt/ramdisk/centrex
+       sudo chmod -R 777 /mnt/ramdisk
+       ls -la /mnt/ramdisk
