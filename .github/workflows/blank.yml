@@ -12,7 +12,7 @@ jobs:
     - name: checking groups
       run: |
        sudo mkdir -p /mnt/ramdisk/centrex_controller
-       sudo chmod -R 777 /mnt/ramdisk/centrex_controller
+       sudo chown -R runner:staff /mnt/ramdisk/centrex_controller
        sudo -u runner touch /mnt/ramdisk/centrex_controller/test
        echo "adding runner into staff group"
        sudo usermod -aG staff runner
