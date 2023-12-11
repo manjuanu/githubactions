@@ -11,17 +11,22 @@ jobs:
 
     - name: checking groups
       run: |
-       # Set up the main directory
-         sudo mkdir -p /mnt/ramdisk/centrex_controller
-          
-         sudo chown -R runner:docker /mnt/ramdisk/centrex_controller
-         sudo setfacl -d -m g:docker:rwx /mnt/ramdisk/centrex_controller
-         sudo chmod u+w /mnt/ramdisk/centrex_controller
-     
-         # Create a new subdirectory using the script
-         sudo -u runner mkdir -p /mnt/ramdisk/centrex_controller/world
-         
-         # Check the permissions
-         ls -la /mnt/ramdisk/centrex_controller
+        sudo mkdir -p /mnt/ramdisk/centrex_controller
+        sudo chown -R runner:staff /mnt/ramdisk/centrex_controller
+        sudo setfacl -d -m g:staff:rwx /mnt/ramdisk/centrex_controller
+        sudo chmod u+w /mnt/ramdisk/centrex_controller
+
+        echo "Adding runner into staff group"
+        sudo usermod -aG staff runner
+
+        # Set the umask for the runner user
+        echo "umask 002" | sudo -u runner tee -a $HOME/.bashrc
+        source $HOME/.bashrc
+
+        # Create a new directory
+        sudo -u runner mkdir -p /mnt/ramdisk/centrex_controller/new_directory
+
+        # Check the permissions
+        ls -la /mnt/ramdisk/centrex_controller
 
      
