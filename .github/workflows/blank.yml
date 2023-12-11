@@ -28,6 +28,6 @@ jobs:
        echo "listin ####################"
        sudo ls -l /mnt/ramdisk/centrex_controller
        echo "giving write access to group"
-       sudo chmod g+W /mnt/ramdisk/centrex_controller
+       sudo chmod g+w /mnt/ramdisk/centrex_controller
        echo "listing again"
        ls -ltr /mnt/ramdisk/centrex_controller
