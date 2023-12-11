@@ -18,6 +18,7 @@ jobs:
        sudo -u runner touch /mnt/ramdisk/centrex_controller/test
        echo "adding runner into staff group"
        sudo usermod -aG staff runner
+       sudo chown -R :staff /mnt/ramdisk/centrex_controller
        sudo ls -l /mnt/ramdisk/centrex_controller
        sudo -u runner mkdir -p /mnt/ramdisk/centrex_controller/hello
        ls -la /mnt/ramdisk/centrex_controller
