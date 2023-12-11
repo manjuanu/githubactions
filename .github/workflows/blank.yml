@@ -11,7 +11,7 @@ jobs:
 
     - name: checking groups
       run: |
-       sudo mkdir -p /mnt/ramdisk/centrex_controller
+       sudo -u runner mkdir -p /mnt/ramdisk/centrex_controller
        sudo chown runner:staff /mnt/ramdisk/centrex_controller
        sudo ls -l /mnt/ramdisk
        sudo ls -l /mnt/ramdisk/centrex_controller
@@ -24,5 +24,5 @@ jobs:
        echo "adding runner into staff group"
        sudo usermod -aG staff runner
        echo "########################################"
-       sudo -u runner chown :staff /mnt/ramdisk/centrex_controller/test
+       sudo -u runner chown :staff /mnt/ramdisk/centrex_controller
        sudo ls -l /mnt/ramdisk/centrex_controller
