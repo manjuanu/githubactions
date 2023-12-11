@@ -21,6 +21,8 @@ jobs:
        groups runner
        echo "giving write access to runner user"
        sudo chmod u+w /mnt/ramdisk/centrex_controller/test
+       echo "adding runner into staff group"
+       sudo usermod -aG staff runner
        echo "########################################"
        sudo -u runner chown :staff /mnt/ramdisk/centrex_controller/test
        sudo ls -l /mnt/ramdisk/centrex_controller
