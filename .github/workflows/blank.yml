@@ -17,5 +17,10 @@ jobs:
        sudo ls -l /mnt/ramdisk/centrex_controller
        sudo -u runner touch /mnt/ramdisk/centrex_controller/test
        sudo ls -l /mnt/ramdisk/centrex_controller
+       echo "listing groups"
+       groups runner
+       echo "giving write access to runner user"
+       sudo chmod u+w /mnt/ramdisk/centrex_controller/test
+       echo "########################################"
        sudo -u runner chown :staff /mnt/ramdisk/centrex_controller/test
        sudo ls -l /mnt/ramdisk/centrex_controller
