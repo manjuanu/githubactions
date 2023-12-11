@@ -17,8 +17,7 @@ jobs:
         echo "grepping mnt"
         sudo df -h | grep mnt
         echo " creating directory centrex"
-        sudo mkdir -p /mnt/ramdisk/centrex_controller
-        echo "lsof execution"
-        sudo lsof /mnt/ramdisk/centrex_controller
+        mkdir -p /mnt/ramdisk/centrex_controller
+        ls -ltr /mnt/ramdisk
         echo "###############"
         df -T /mnt/ramdisk
