@@ -14,7 +14,11 @@ jobs:
         sudo mkdir -p /mnt/ramdisk
         sudo chmod -R 777 /mnt/ramdisk
         sudo mount -t tmpfs -o size=1000m tmpfs /mnt/ramdisk
+        echo "grepping mnt"
         sudo df -h | grep mnt
-        mkdir -p /mnt/ramdisk/centrex_controller
+        echo " creating directory centrex"
+        sudo mkdir -p /mnt/ramdisk/centrex_controller
+        echo "lsof execution"
         sudo lsof /mnt/ramdisk/centrex_controller
+        echo "###############"
         df -T /mnt/ramdisk
