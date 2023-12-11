@@ -11,20 +11,11 @@ jobs:
 
     - name: checking groups
       run: |
-        sudo mkdir -p /mnt/ramdisk
-        sudo chmod -R 777 /mnt/ramdisk
-        sudo mount -t tmpfs -o size=1000m tmpfs /mnt/ramdisk
-        echo "grepping mnt"
-        sudo df -h | grep mnt
-        echo " creating directory centrex"
-        mkdir -p /mnt/ramdisk/centrex_controller
-        ls -ltr /mnt/ramdisk
-        echo "###############"
-        sudo chown :staff /mnt/ramdisk/centrex_controller
-        sudo chown :docker /mnt/ramdisk/centrex_controller
-        sudo chmod -R g+rwX /mnt/ramdisk/centrex_controller
-        sudo usermod -aG staff runner
-        echo "checking runner id"
-        id runner
-        echo "##########"
-        ls -ltr /mnt/ramdisk/centrex_controller
+       sudo mkdir -p /mnt/ramdisk/centrex_controller
+       sudo chown runner:staff /mnt/ramdisk/centrex_controller
+       sudo ls -l /mnt/ramdisk
+       sudo ls -l /mnt/ramdisk/centrex_controller
+       sudo -u runner touch /mnt/ramdisk/centrex_controller/test
+       sudo ls -l /mnt/ramdisk/centrex_controller
+       sudo -u runner chown :staff /mnt/ramdisk/centrex_controller/test
+       sudo ls -l /mnt/ramdisk/centrex_controller
