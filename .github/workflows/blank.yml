@@ -20,4 +20,11 @@ jobs:
         mkdir -p /mnt/ramdisk/centrex_controller
         ls -ltr /mnt/ramdisk
         echo "###############"
-        df -T /mnt/ramdisk
+        sudo chown :staff /mnt/ramdisk/centrex_controller
+        sudo chown :docker /mnt/ramdisk/centrex_controller
+        sudo chmod -R g+rwX /mnt/ramdisk/centrex_controller
+        sudo usermod -aG staff runner
+        echo "checking runner id"
+        id runner
+        echo "##########"
+        ls -ltr /mnt/ramdisk/centrex_controller
