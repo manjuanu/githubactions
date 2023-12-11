@@ -13,11 +13,11 @@ jobs:
       run: |
        sudo mkdir -p /mnt/ramdisk/centrex_controller
        sudo chown -R runner:staff /mnt/ramdisk/centrex_controller
+       sudo setfacl -d -m g:staff:rwx /mnt/ramdisk/centrex_controller
+       sudo chmod u+w /mnt/ramdisk/centrex_controller
        sudo -u runner touch /mnt/ramdisk/centrex_controller/test
        echo "adding runner into staff group"
        sudo usermod -aG staff runner
-       sudo chmod -R g+w /mnt/ramdisk/centrex_controller
-       sudo -u runner chown -R :staff /mnt/ramdisk/centrex_controller
        sudo ls -l /mnt/ramdisk/centrex_controller
        sudo -u runner mkdir -p /mnt/ramdisk/centrex_controller/hello
        ls -la /mnt/ramdisk/centrex_controller
