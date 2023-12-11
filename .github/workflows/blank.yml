@@ -12,22 +12,9 @@ jobs:
     - name: checking groups
       run: |
        sudo mkdir -p /mnt/ramdisk/centrex_controller
-       sudo chown runner:staff /mnt/ramdisk/centrex_controller
-       sudo ls -l /mnt/ramdisk
-       sudo ls -l /mnt/ramdisk/centrex_controller
-       sudo -u runner touch /mnt/ramdisk/centrex_controller
-       sudo ls -l /mnt/ramdisk/centrex_controller
-       echo "listing groups"
-       groups runner
-       echo "giving write access to runner user"
-       sudo chmod u+w /mnt/ramdisk/centrex_controller
+       sudo -u runner touch test /mnt/ramdisk/centrex_controller
        echo "adding runner into staff group"
        sudo usermod -aG staff runner
-       echo "########################################"
-       sudo -u runner chown -R :staff /mnt/ramdisk/centrex_controller
-       echo "listin ####################"
+       sudo -u runner chown :staff /mnt/ramdisk/centrex_controller/test
        sudo ls -l /mnt/ramdisk/centrex_controller
-       echo "giving write access to group"
-       sudo chmod -R g+w /mnt/ramdisk/centrex_controller
-       echo "listing again"
-       ls -ltr /mnt/ramdisk/centrex_controller
+     
