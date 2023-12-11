@@ -16,6 +16,7 @@ jobs:
        sudo -u runner touch /mnt/ramdisk/centrex_controller/test
        echo "adding runner into staff group"
        sudo usermod -aG staff runner
+       sudo -u runner chmod -R g+w /mnt/ramdisk/centrex_controller
        sudo -u runner chown :staff /mnt/ramdisk/centrex_controller/test
        sudo ls -l /mnt/ramdisk/centrex_controller
      
