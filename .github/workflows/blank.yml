@@ -17,17 +17,9 @@ jobs:
          sudo chown -R runner:docker /mnt/ramdisk/centrex_controller
          sudo setfacl -d -m g:docker:rwx /mnt/ramdisk/centrex_controller
          sudo chmod u+w /mnt/ramdisk/centrex_controller
-         
-         
-         
-         # Set the umask for the 'runner' user
-         sudo -u runner bash -c 'echo "umask 002" >> ~/.bashrc'
-         
-         # Activate the new umask for the current session
-         source /home/runner/.bashrc
-         
+     
          # Create a new subdirectory using the script
-         sudo -u runner mkdir -p /mnt/ramdisk/centrex_controller/new_dir
+         sudo -u runner mkdir -p /mnt/ramdisk/centrex_controller/world
          
          # Check the permissions
          ls -la /mnt/ramdisk/centrex_controller
