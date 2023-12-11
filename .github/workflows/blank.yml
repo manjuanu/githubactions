@@ -11,15 +11,26 @@ jobs:
 
     - name: checking groups
       run: |
-       sudo mkdir -p /mnt/ramdisk/centrex_controller
-       sudo chown -R runner:staff /mnt/ramdisk/centrex_controller
-       sudo setfacl -d -m g:staff:rwx /mnt/ramdisk/centrex_controller
-       sudo chmod u+w /mnt/ramdisk/centrex_controller
-       sudo -u runner touch /mnt/ramdisk/centrex_controller/test
-       echo "adding runner into staff group"
-       sudo usermod -aG staff runner
-       sudo chown -R :staff /mnt/ramdisk/centrex_controller
-       sudo ls -l /mnt/ramdisk/centrex_controller
-       sudo -u runner mkdir -p /mnt/ramdisk/centrex_controller/hello
-       ls -la /mnt/ramdisk/centrex_controller
+       # Set up the main directory
+         sudo mkdir -p /mnt/ramdisk/centrex_controller
+         sudo chown -R runner:staff /mnt/ramdisk/centrex_controller
+         sudo setfacl -d -m g:staff:rwx /mnt/ramdisk/centrex_controller
+         sudo chmod u+w /mnt/ramdisk/centrex_controller
+         
+         # Add the 'runner' user to the 'staff' group
+         echo "Adding runner into staff group"
+         sudo usermod -aG staff runner
+         
+         # Set the umask for the 'runner' user
+         sudo -u runner bash -c 'echo "umask 002" >> ~/.bashrc'
+         
+         # Activate the new umask for the current session
+         source /home/runner/.bashrc
+         
+         # Create a new subdirectory using the script
+         sudo -u runner mkdir -p /mnt/ramdisk/centrex_controller/new_directory
+         
+         # Check the permissions
+         ls -la /mnt/ramdisk/centrex_controller
+
      
