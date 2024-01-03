@@ -1,11 +1,7 @@
 name: testing
 
 on: 
-  pull_request:
-   types:
-   - opened
-   branches:
-   - master
+ push
 
 jobs:
  
@@ -15,10 +11,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
       
-    - name: testing pull request
-      run: |
-         pwd
-         ls -ltr
-         cat hello.txt
+    - name: print env
+      run: echo "${{ secrets.MYSQL_USER }}"
 
       
