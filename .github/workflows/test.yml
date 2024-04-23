@@ -1,0 +1,17 @@
+name: testcases
+
+on: 
+  push
+
+jobs:
+ tests:
+    runs-on: ubuntu-latest
+    steps:
+    - name: testing
+      run: |
+        echo "FIRST_VALUE=42" >> $GITHUB_ENV
+        echo "SECOND_VALUE=100" >> $GITHUB_ENV
+    - name: Show environment variables
+      run: |
+          echo "First value: $FIRST_VALUE"
+          echo "Second value: $SECOND_VALUE"
