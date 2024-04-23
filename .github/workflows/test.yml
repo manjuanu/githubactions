@@ -11,6 +11,6 @@ jobs:
       run: |
         echo "2959 specifications (9270 requirements), 3 failures, 0 errors" >> output.txt
         cat output.txt
-        failures_count=$(grep -oE '[0-9]+ failures' output.txt | awk '{print $1}')
+        failures_count=$(grep -oE '[0-9]+ failures' output.txt | head -n1 | grep -oE '[0-9]+')
         echo "failures_count=${failures_count}" >> $GITHUB_ENV
         echo "${{ env.failures_count }}"
