@@ -9,9 +9,7 @@ jobs:
     steps:
     - name: testing
       run: |
-        echo "FIRST_VALUE=42" >> $GITHUB_ENV
-        echo "SECOND_VALUE=100" >> $GITHUB_ENV
-    - name: Show environment variables
-      run: |
-          echo "First value: $FIRST_VALUE"
-          echo "Second value: $SECOND_VALUE"
+        echo "2959 specifications (9270 requirements), 3 failures, 0 errors" >> output.txt
+        failures_count=$(grep -oE '[0-9]+ failures' output.txt | awk '{print $1}')
+        echo "failures_count=${failures_count}" >> $GITHUB_ENV
+        echo ""${{ env.failures_count }}""
